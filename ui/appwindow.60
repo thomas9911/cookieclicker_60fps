@@ -1,0 +1,65 @@
+import { Button, VerticalBox } from "sixtyfps_widgets.60";
+
+export AppWindow := Window {
+    title: "CookieClicker";
+    icon: @image-url("cookie.png");
+
+    property<length> a_width: 640px;
+    property<length> a_height: 480px;
+
+    width: a_width;
+    height: a_height;
+
+    property<string> counter: "1";
+    property<string> multiplier: "1";
+    property<string> base: "1";
+
+    callback request-increase-base();
+    callback request-increase-value();
+    callback request-increase-multiplier();
+
+    GridLayout { 
+        spacing: 5px; 
+        Text {
+            text: "Base: \{base}";
+            row: 0;
+            col: 0; 
+        }
+        Text {
+            text: "Multiplier: \{multiplier}";
+            row: 0;
+            col: 1; 
+        }
+        Text {
+            wrap: word-wrap;
+            font-size: 32px;
+            text: "Counter: \n\{counter}";
+            row: 1;
+            colspan: 3; 
+        }
+        Button {
+            text: "Increase Multiplier";
+            clicked => { 
+                request-increase-multiplier();
+            }
+            row: 2;
+            col: 0; 
+        }
+        Button {
+            text: "Increase Base";
+            clicked => { 
+                request-increase-base();
+            }
+            row: 2;
+            col: 1; 
+        }
+        Button {
+            text: "Increase Counter";
+            clicked => { 
+                request-increase-value();
+            }
+            row: 2;
+            col: 2; 
+        }
+    }
+}
